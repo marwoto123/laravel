@@ -1,0 +1,64 @@
+
+
+ 
+$user->name = 'sul'
+$user->email = 'sul@gmail.com'
+$user->password = bcrypt('12345')
+$user->save()
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+$post = new Post
+$post->title = 'judul pertama'
+$post->excerpt = 'sIt is a long established fact that a 
+                  distracted by the readable content of a page '
+
+$post->body = 'It is a long established fact <p>that a reader will be distracted by 
+                the readable content of a page when looking at its layout. The </p>
+                 '
+
+$post->save()
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+
+Post::create([
+'title' => 'judul tiga',
+'slug'  => 'judul-tiga',
+'excerpt' => 'sIt is a long established fact that a 
+              distracted by the readable content of a page ',
+
+'body' => 'It is a long established fact <p>that a reader will be distracted by 
+          the readable content of a page when 
+          looking at its layout. The </p>'  
+
+])
+
+*************************categoryyy************************************************
+$category = new Category
+$category->name = 'Programing'
+$category->slug = 'programing'
+$category->save()
+
+Category::create([
+    'name' => 'personal',
+    'slug' => 'personal'
+])
+
+Category::all()
+Post::where('category_id',2)->get()
+
+Post::create([
+'title' => 'judul tiga',
+'category_id' => 3,
+'slug'  => 'judul-tiga',
+'excerpt' => 'sIt is a long established fact that a 
+              distracted by the readable content of a page ',
+
+'body' => 'It is a long established fact <p>that a reader will be distracted by 
+          the readable content of a page when 
+          looking at its layout. The </p>'  
+
+])
