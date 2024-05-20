@@ -10,7 +10,17 @@ class Post extends Model
     use HasFactory;
     // protected $fillable =['title','excerpt','body' ];
     protected $guarded = ['id'];
-    protected $with = ['category','author'];
+    protected $with = ['category', 'author'];
+
+    public function scopeFilter($query, array $filters)
+    {
+        if  ( isset ($filters['search']) ? $filters['search'] : false) {
+           return $query->where('title', 'like', '%' . request('search') . '%')
+            ->orWhere('body', 'like', '%' . request('search') . '%' );
+        }
+    }
+
+
 
     public function category()
     {
@@ -21,7 +31,6 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
 }
 // $fillable (yang boleh di isi manual sisanya otomatis)
 // $guarded (yang tidak boleh di isi manual)
