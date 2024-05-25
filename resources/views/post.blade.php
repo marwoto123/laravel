@@ -13,7 +13,17 @@
                     <a
                         href="/categories/{{ $post->category->slug }}"class="text-decoration-none ">{{ $post->category->name }}</a>
                 </p>
-                <img src="/img/jerry.jpg" alt="{{ $post->category->name }}" class="img-fluid">
+
+                @if ($post->image)
+                <div style="max-height: 350px; overflow:hidden">
+                    <img src="{{ asset('storage/' .$post->image) }}" alt="{{ $post->category->name }}" class="img-fluid ">
+                </div>
+                @else
+                    <img src="/img/jerry.jpg" alt="{{ $post->category->name }}" class="img-fluid ">
+                @endif
+                {{-- <img src="/img/jerry.jpg" alt="{{ $post->category->name }}" class="img-fluid"> --}}
+
+
                 <article class="my-3 fs-5">
 
                     {!! $post->body !!}

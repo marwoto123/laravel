@@ -18,12 +18,13 @@ class DatabaseSeeder extends Seeder
     {
 
 
-        // User::create([
-        //     'name' => 'sandika',
-        //     'email' => 'sandika@gmail.com',
-        //     'password' => bcrypt('sul'),
-        //     'name' => 'sandika'
-        // ]);
+        User::create([
+            'name' => 'sulhamzah',
+            'username' => 'sulhamzah',
+            'email' => 'sulhamzah@gmail.com',
+            'password' => bcrypt('pasword')
+            
+        ]);
         // User::create([
         //     'name' => 'hamzah',
         //     'email' => 'hamzah@gmail.com',
@@ -49,7 +50,7 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        Post::factory(20)->create();
+        Post::factory(10)->create();
         // Post::create([
         //     'title' => 'judul pertama',
         //     'slug' => 'judul-pertama',

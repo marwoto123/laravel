@@ -5,7 +5,8 @@
     </div>
     <div class="row">
         <div class="col-lg-8">
-            <form method="post" class="mb-5"action="/dashboard/posts">@csrf
+            <form method="post" class="mb-10"action="/dashboard/posts" enctype="multipart/form-data">@csrf
+                {{-- ************title************* --}}
                 <div class="mb-3">
                     <label for="title" class="form-label">Title </label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title"
@@ -16,7 +17,8 @@
                         </div>
                     @enderror
                 </div>
-
+                {{-- ************end title************* --}}
+                {{-- ************slug************* --}}
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug </label>
                     <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug"
@@ -26,32 +28,50 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
+                </div>{{-- ************end slug************* --}}
 
+                {{-- ************category************* --}}
                 <div class="mb-3">
                     <label for="category" class="form-label">category </label>
                     <select class="form-select" name="category_id">
                         @foreach ($categories as $category)
-
-                        @if (old('category_id')== $category->id)
-                            <option value="{{ $category->id }}"selected>{{ $category->name }}</option>
+                            @if (old('category_id') == $category->id)
+                                <option value="{{ $category->id }}"selected>{{ $category->name }}</option>
                             @else
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
                             @endif
                         @endforeach
                     </select>
-                </div>
+                </div>{{-- ************end category************* --}}
 
+                {{-- ************upload gambar************* --}}
+               
+                    <div class="form-group">
+                        <label for="image" class="form-label">Post Image</label>
+                        <input class="form-control @error('image') is-invalid @enderror" type="file"  id="image" name="image" >
+                        @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    </div>
+               
+
+                {{-- ************end upload gambar************* --}}
+
+                {{-- ************body************* --}}
                 <div class="mb-3">
-                    <label for="body" class="form-label">Body </label>
+                    <label for="body" class="form-label ">Body </label>
                     @error('body')
                         <p class="text-danger"> {{ $message }}</p>
                     @enderror
-                    <input id="body" type="hidden" name="body" value="{{ old('body') }}">
+                    <input id="body" class="@error('image') is-invalid @enderror" type="hidden" name="body" value="{{ old('body') }}">
                     <trix-editor input="body"></trix-editor>
 
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                {{-- ************end body************* --}}
+
+                <button type="submit" class="btn btn-primary">Buat Postingan Baru</button>
             </form>
         </div>
     </div>
@@ -63,7 +83,10 @@
             fetch('/dashboard/posts/checkSlug?title=' + title.value)
                 .then(response => response.json())
                 .then(data => slug.value = data.slug)
-
         });
+
+        document.addEventListener('trix-file-accept',function(e){
+            e.preventDefault();
+        })
     </script>
 @endsection
