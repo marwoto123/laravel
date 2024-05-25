@@ -31,6 +31,14 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
 }
 // $fillable (yang boleh di isi manual sisanya otomatis)
 // $guarded (yang tidak boleh di isi manual)
+
